@@ -6,4 +6,7 @@ export class Environment {
 
   @IsString()
   SERVICE_NAME = process.env.SERVICE_NAME;
+
+  @IsString()
+  USER_SERVER_ADDR = process.env.USER_SERVER_ADDR;
 }
