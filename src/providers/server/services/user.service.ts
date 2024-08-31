@@ -7,9 +7,11 @@ import {
   HttpPutRequest,
 } from '../utils/server.type';
 import { axiosErrorHandler } from 'src/common/utils/axios-error.handler';
+import { SERVICE_NAME } from '../constants/service-name.constant';
 
 @Injectable()
 export class UserService {
+  public serviceName = SERVICE_NAME.USER;
   constructor(
     @Inject('USER_SERVER')
     private readonly userServer: AxiosInstance,
@@ -19,7 +21,7 @@ export class UserService {
     try {
       return await this.userServer.get(data.path, data.config);
     } catch (error) {
-      axiosErrorHandler(error);
+      axiosErrorHandler(error, this.serviceName);
     }
   }
 
@@ -27,7 +29,7 @@ export class UserService {
     try {
       return await this.userServer.post(data.path, data.data, data.config);
     } catch (error) {
-      axiosErrorHandler(error);
+      axiosErrorHandler(error, this.serviceName);
     }
   }
 
@@ -35,7 +37,7 @@ export class UserService {
     try {
       return await this.userServer.put(data.path, data.data, data.config);
     } catch (error) {
-      axiosErrorHandler(error);
+      axiosErrorHandler(error, this.serviceName);
     }
   }
 
@@ -43,7 +45,7 @@ export class UserService {
     try {
       return await this.userServer.delete(data.path, data.config);
     } catch (error) {
-      axiosErrorHandler(error);
+      axiosErrorHandler(error, this.serviceName);
     }
   }
 }
