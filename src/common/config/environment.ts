@@ -1,4 +1,5 @@
-import { IsIn, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsIn, IsInt, IsNumber, IsNumberString, IsString } from 'class-validator';
 
 export class Environment {
   @IsIn(['production', 'test', 'development'])
@@ -6,6 +7,9 @@ export class Environment {
 
   @IsString()
   SERVICE_NAME = process.env.SERVICE_NAME;
+
+  @IsNumberString()
+  PORT = process.env.SERVICE_PORT;
 
   @IsString()
   USER_SERVER_ADDR = process.env.USER_SERVER_ADDR;

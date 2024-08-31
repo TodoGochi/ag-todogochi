@@ -1,5 +1,6 @@
 import { HttpException } from '@nestjs/common';
 import { Config } from '../config/config';
+import { HttpStatusCode } from 'axios';
 
 const serviceName = Config.getEnvironment().SERVICE_NAME;
 
@@ -20,7 +21,7 @@ const responseErrorHandler = (error: any) => {
         errorCode: error.response.data.errorCode || `${serviceName}-0000`,
         message: error.response.data.message || 'Internal Server Error',
       },
-      error.response.status || 500,
+      error.response.status || HttpStatusCode.InternalServerError,
     );
   }
 };
@@ -32,7 +33,7 @@ const requestErrorHandler = (error: any, serviceName?: string) => {
         errorCode: error.response.data.errorCode || `${serviceName}-0000`,
         message: 'Service Unavailable :: ' + serviceName,
       },
-      503,
+      HttpStatusCode.ServiceUnavailable,
     );
   }
 };
