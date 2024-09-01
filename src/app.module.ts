@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServerModule } from './provider/server/server.module';
 import { HttpExceptionFilter } from './common/core/filters/http-exception.filter';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [ServerModule],
+  imports: [ServerModule, UserModule],
   controllers: [AppController],
   providers: [
     AppService,
