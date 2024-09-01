@@ -1,0 +1,24 @@
+# name: API Production
+# on:
+#   push:
+#     branches:
+#       - develop
+# jobs:
+#   Deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Deploy via SSH
+#         env:
+#           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+#           HOSTNAME: 'ec2-3-38-41-125.ap-northeast-2.compute.amazonaws.com'
+#           USER_NAME: 'ec2-user'
+#         run: |
+#           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+#           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+#             cd darabom-api-v2
+#             git pull origin develop
+#             npm install &&
+#             pm2 restart api-dev
+#           '
