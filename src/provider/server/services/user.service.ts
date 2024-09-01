@@ -6,7 +6,7 @@ import {
   HttpPostRequest,
   HttpPutRequest,
 } from '../utils/server.type';
-import { axiosErrorHandler } from 'src/common/utils/axios-error.handler';
+import { axiosErrorHandler } from 'src/common/util/axios-error.handler';
 import { SERVICE_NAME } from '../constants/service-name.constant';
 
 @Injectable()

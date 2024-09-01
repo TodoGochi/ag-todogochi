@@ -2,7 +2,7 @@ import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { UserService } from './services/user.service';
 import axios from 'axios';
-import { Config } from 'src/common/config/config';
+import { Config } from 'src/common/environment/config';
 
 @Module({
   imports: [HttpModule],

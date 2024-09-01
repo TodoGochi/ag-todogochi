@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ServerModule } from './providers/server/server.module';
+import { ServerModule } from './provider/server/server.module';
 import { HttpExceptionFilter } from './common/core/filters/http-exception.filter';
 
 @Module({

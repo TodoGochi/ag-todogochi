@@ -1,5 +1,5 @@
 import { HttpException } from '@nestjs/common';
-import { Config } from '../config/config';
+import { Config } from '../environment/config';
 import { HttpStatusCode } from 'axios';
 
 const serviceName = Config.getEnvironment().SERVICE_NAME;
