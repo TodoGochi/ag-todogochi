@@ -15,7 +15,7 @@ export class SignUpReqBodyDto {
     description: 'type :: email || kakao || google',
   })
   @IsEnum(SignUpType)
-  type: SignUpType;
+  signUpType: SignUpType;
 
   @ApiPropertyOptional({
     example: 'password',
