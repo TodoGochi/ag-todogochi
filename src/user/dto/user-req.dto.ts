@@ -7,6 +7,9 @@ export class SignUpReqBodyDto {
   @IsEmail()
   email: string;
 
+  @ApiProperty({ example: 'nickname', description: 'nickname' })
+  nickName: string;
+
   @ApiProperty({
     example: 'email',
     description: 'type :: email || kakao || google',
@@ -21,4 +24,10 @@ export class SignUpReqBodyDto {
   @IsOptional()
   @IsString()
   password: string;
+}
+
+export class EmailCheckReqBodyDto {
+  @ApiProperty({ example: 'example@example.com', description: 'email' })
+  @IsEmail()
+  email: string;
 }

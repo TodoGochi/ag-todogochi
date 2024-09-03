@@ -12,4 +12,12 @@ export class UserService {
     });
     return { data: response.data, status: response.status };
   }
+
+  async emailCheck(input: { email: string }) {
+    const response = await this.userService.post({
+      path: '/user/email-check',
+      data: input,
+    });
+    return { data: response.data, status: response.status };
+  }
 }
