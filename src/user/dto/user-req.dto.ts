@@ -31,3 +31,13 @@ export class EmailCheckReqBodyDto {
   @IsEmail()
   email: string;
 }
+
+export class SignInReqBodyDto {
+  @ApiProperty({ example: 'example@example.com', description: 'email' })
+  @IsEmail()
+  email: string;
+
+  @ApiProperty({ example: 'password', description: 'password' })
+  @IsString()
+  password: string;
+}

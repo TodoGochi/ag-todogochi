@@ -1,6 +1,10 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
-import { EmailCheckReqBodyDto, SignUpReqBodyDto } from './dto/user-req.dto';
+import {
+  EmailCheckReqBodyDto,
+  SignInReqBodyDto,
+  SignUpReqBodyDto,
+} from './dto/user-req.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
@@ -22,6 +26,12 @@ export class UserController {
   @Post('email-check')
   async emailCheck(@Body() body: EmailCheckReqBodyDto, @Res() res: Response) {
     const response = await this.userService.emailCheck(body);
+    return res.status(response.status).json(response.data);
+  }
+
+  @Post('sign-in')
+  async signIn(@Body() body: SignInReqBodyDto, @Res() res: Response) {
+    const response = await this.userService.signIn(body);
     return res.status(response.status).json(response.data);
   }
 }

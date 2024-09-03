@@ -20,4 +20,12 @@ export class UserService {
     });
     return { data: response.data, status: response.status };
   }
+
+  async signIn(input: { email: string; password: string }) {
+    const response = await this.userService.post({
+      path: '/user/sign-in',
+      data: input,
+    });
+    return { data: response.data, status: response.status };
+  }
 }
