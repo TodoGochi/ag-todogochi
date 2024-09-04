@@ -1,5 +1,4 @@
-import { IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
-import { SignUpType } from '../constant/sign-up.enum';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class SignUpReqBodyDto {
@@ -9,13 +8,6 @@ export class SignUpReqBodyDto {
 
   @ApiProperty({ example: 'nickname', description: 'nickname' })
   nickName: string;
-
-  @ApiProperty({
-    example: 'email',
-    description: 'type :: email || kakao || google',
-  })
-  @IsEnum(SignUpType)
-  signUpType: SignUpType;
 
   @ApiPropertyOptional({
     example: 'password',

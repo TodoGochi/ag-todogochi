@@ -5,7 +5,7 @@ import { UserService as UserServer } from 'src/provider/server/services/user.ser
 export class UserService {
   constructor(private readonly userService: UserServer) {}
 
-  async signUp(input: { email: string; password: string; signUpType: string }) {
+  async signUp(input: { email: string; password: string }) {
     const response = await this.userService.post({
       path: '/user/sign-up',
       data: input,

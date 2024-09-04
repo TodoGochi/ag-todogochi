@@ -1,4 +1,9 @@
 import { SwaggerOptions } from 'src/common/decorators/swagger.decorator';
+import {
+  EmailCheckResDto,
+  SignInResDto,
+  SignUpResDto,
+} from '../dto/user-res.dto';
 
 export const USER_DOCS: Record<string, SwaggerOptions> = {
   USER_CONTROLLER: {
@@ -7,19 +12,31 @@ export const USER_DOCS: Record<string, SwaggerOptions> = {
   SIGN_UP: {
     operation: {
       summary: 'Sign up',
-      description: 'email을 통한 회원가입 입니다.',
+      description: 'This endpoint handles user registration using email.',
+    },
+    response: {
+      status: 201,
+      type: SignUpResDto,
     },
   },
   EMAIL_CHECK: {
     operation: {
       summary: 'Email check',
-      description: 'email 중복 확인입니다.',
+      description: 'This endpoint checks for email duplication.',
+    },
+    response: {
+      status: 200,
+      type: EmailCheckResDto,
     },
   },
   SIGN_IN: {
     operation: {
       summary: 'Sign in',
-      description: 'email을 통한 로그인입니다.',
+      description: 'This endpoint handles user login via email.',
+    },
+    response: {
+      status: 201,
+      type: SignInResDto,
     },
   },
 };
