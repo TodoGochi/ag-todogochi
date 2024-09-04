@@ -4,28 +4,4 @@ import { UserService as UserServer } from 'src/provider/server/services/user.ser
 @Injectable()
 export class UserService {
   constructor(private readonly userService: UserServer) {}
-
-  async signUp(input: { email: string; password: string }) {
-    const response = await this.userService.post({
-      path: '/user/sign-up',
-      data: input,
-    });
-    return { data: response.data, status: response.status };
-  }
-
-  async emailCheck(input: { email: string }) {
-    const response = await this.userService.post({
-      path: '/user/email-check',
-      data: input,
-    });
-    return { data: response.data, status: response.status };
-  }
-
-  async signIn(input: { email: string; password: string }) {
-    const response = await this.userService.post({
-      path: '/user/sign-in',
-      data: input,
-    });
-    return { data: response.data, status: response.status };
-  }
 }
