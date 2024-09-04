@@ -8,6 +8,7 @@ import {
 import { Response } from 'express';
 import { Swagger } from 'src/common/decorators/swagger.decorator';
 import { USER_DOCS } from './constant/user.swagger';
+import { REFRESH_TOKEN_MAX_AGE } from './constant/refresh-token-max-age.constant';
 
 @Swagger(USER_DOCS.USER_CONTROLLER)
 @Controller('user')
@@ -18,13 +19,24 @@ export class UserController {
   @Post('sign-up')
   async signUp(@Body() body: SignUpReqBodyDto, @Res() res: Response) {
     const response = await this.userService.signUp(body);
-    return res.status(response.status).json(response.data);
+    const { user, tokens } = response.data;
+    res.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+    });
+
+    return res.status(response.status).json({
+      user,
+      accessToken: tokens.accessToken,
+    });
   }
 
   @Swagger(USER_DOCS.EMAIL_CHECK)
   @Post('email-check')
   async emailCheck(@Body() body: EmailCheckReqBodyDto, @Res() res: Response) {
     const response = await this.userService.emailCheck(body);
+
     return res.status(response.status).json(response.data);
   }
 
@@ -32,6 +44,16 @@ export class UserController {
   @Post('sign-in')
   async signIn(@Body() body: SignInReqBodyDto, @Res() res: Response) {
     const response = await this.userService.signIn(body);
-    return res.status(response.status).json(response.data);
+    const { user, tokens } = response.data;
+    res.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+    });
+
+    return res.status(response.status).json({
+      user,
+      accessToken: tokens.accessToken,
+    });
   }
 }
