@@ -1,5 +1,5 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsEmail, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class SignUpReqBodyDto {
   @ApiProperty({ example: 'example@example.com', description: 'email' })
@@ -9,11 +9,10 @@ export class SignUpReqBodyDto {
   @ApiProperty({ example: 'nickname', description: 'nickname' })
   nickName: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     example: 'password',
-    description: 'If the type is email, a password is required.',
+    description: 'password',
   })
-  @IsOptional()
   @IsString()
   password: string;
 }
