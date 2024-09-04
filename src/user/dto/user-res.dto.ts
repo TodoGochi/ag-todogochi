@@ -16,6 +16,9 @@ export class UserDto {
   @ApiProperty({ description: 'User ID', example: 2 })
   userId: number;
 
+  @ApiProperty({ description: 'User Role', example: 0 })
+  role: number;
+
   @ApiProperty({
     description: 'User account creation date',
     example: '2024-09-04T01:27:47.803Z',
