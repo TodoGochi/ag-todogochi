@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { Config } from 'src/common/environment/config';
 import { UserService as UserServer } from 'src/provider/server/services/user.service';
+import { objectToQuerystring } from 'src/utils/object-to-querystring';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +28,21 @@ export class AuthService {
       path: '/auth/sign-in',
       data: input,
     });
+    return { data: response.data, status: response.status };
+  }
+
+  async signInKakao() {
+    const response = await this.userService.get({
+      path: '/auth/sign-in/kakao',
+    });
+    return { data: response.data, status: response.status };
+  }
+
+  async kakaoCallback(input: Record<string, any>) {
+    const response = await this.userService.get({
+      path: `/auth/kakao/callback?${objectToQuerystring(input)}`,
+    });
+
     return { data: response.data, status: response.status };
   }
 }

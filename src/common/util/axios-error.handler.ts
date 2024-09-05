@@ -1,12 +1,9 @@
 import { HttpException } from '@nestjs/common';
-import { Config } from '../environment/config';
 import { HttpStatusCode } from 'axios';
-
-const serviceName = Config.getEnvironment().SERVICE_NAME;
 
 export const axiosErrorHandler = (error: any, serviceName?: string) => {
   if (error.response) {
-    responseErrorHandler(error);
+    responseErrorHandler(error, serviceName);
   } else if (error.request) {
     requestErrorHandler(error, serviceName);
   } else {
@@ -14,7 +11,7 @@ export const axiosErrorHandler = (error: any, serviceName?: string) => {
   }
 };
 
-const responseErrorHandler = (error: any) => {
+const responseErrorHandler = (error: any, serviceName?: string) => {
   throw new HttpException(
     {
       errorCode: error.response.data.errorCode || `${serviceName}-0000`,
