@@ -50,8 +50,8 @@ export class AuthController {
     const { user, tokens } = response.data;
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
-      sameSite: 'none',
-      secure: false,
+      // sameSite: 'none',
+      // secure: false,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
@@ -76,8 +76,8 @@ export class AuthController {
     const { user, tokens } = response.data;
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
-      sameSite: 'none',
-      secure: false,
+      // sameSite: 'none',
+      // secure: false,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
