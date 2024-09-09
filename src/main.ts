@@ -11,6 +11,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:13000',
+      'http://localhost:3000',
       'https://todogochi-helloworlddogs223s-projects.vercel.app/',
     ],
     credentials: true,
