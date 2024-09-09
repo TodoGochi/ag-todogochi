@@ -13,6 +13,7 @@ async function bootstrap() {
       'http://localhost:13000',
       'http://localhost:3000',
       'https://todogochi-helloworlddogs223s-projects.vercel.app/',
+      'https://todogochi.vercel.app/',
     ],
     credentials: true,
   });
