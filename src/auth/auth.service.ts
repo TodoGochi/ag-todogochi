@@ -31,16 +31,9 @@ export class AuthService {
     return { data: response.data, status: response.status };
   }
 
-  async signInKakao() {
-    const response = await this.userService.get({
-      path: '/auth/sign-in/kakao',
-    });
-    return { data: response.data, status: response.status };
-  }
-
-  async kakaoCallback(input: Record<string, any>) {
-    const response = await this.userService.get({
-      path: `/auth/kakao/callback?${objectToQuerystring(input)}`,
+  async signInKakao(input: { authCode: string }) {
+    const response = await this.userService.post({
+      path: `/auth/sign-in/kakao?${objectToQuerystring(input)}`,
     });
 
     return { data: response.data, status: response.status };

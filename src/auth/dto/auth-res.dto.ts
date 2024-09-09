@@ -40,3 +40,5 @@ export class EmailCheckResDto {
   })
   isAvailable: boolean;
 }
+
+export class SignInKakaoResDto extends SignUpResDto {}

@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   EmailCheckReqBodyDto,
+  SignInKakaoReqBodyDto,
   SignInReqBodyDto,
   SignUpReqBodyDto,
 } from './dto/auth-req.dto';
@@ -61,18 +62,10 @@ export class AuthController {
     });
   }
 
-  @ApiExcludeEndpoint()
-  @Get('sign-in/kakao')
-  async signInKakao(@Res() res: Response) {
-    const response = await this.authService.signInKakao();
-
-    res.redirect(response.data);
-  }
-
-  @ApiExcludeEndpoint()
-  @Get('kakao/callback')
-  async kakaoCallback(@Req() req: Request, @Res() res: Response) {
-    const response = await this.authService.kakaoCallback(req.query);
+  @Swagger(AUTH_DOCS.SIGN_IN_KAKAO)
+  @Post('sign-in/kakao')
+  async signInKakao(@Body() body: SignInKakaoReqBodyDto, @Res() res: Response) {
+    const response = await this.authService.signInKakao(body);
     const { user, tokens } = response.data;
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
@@ -85,7 +78,6 @@ export class AuthController {
       user,
       accessToken: tokens.accessToken,
     });
-    // return res.redirect('https://todogochi.vercel.app/main');
   }
 
   @Post('refresh')

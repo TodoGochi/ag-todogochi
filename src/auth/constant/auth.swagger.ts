@@ -1,6 +1,7 @@
 import { SwaggerOptions } from 'src/common/decorators/swagger.decorator';
 import {
   EmailCheckResDto,
+  SignInKakaoResDto,
   SignInResDto,
   SignUpResDto,
 } from '../dto/auth-res.dto';
@@ -37,6 +38,16 @@ export const AUTH_DOCS: Record<string, SwaggerOptions> = {
     response: {
       status: 201,
       type: SignInResDto,
+    },
+  },
+  SIGN_IN_KAKAO: {
+    operation: {
+      summary: 'Sign in with Kakao',
+      description: 'This endpoint handles user login via Kakao.',
+    },
+    response: {
+      status: 201,
+      type: SignInKakaoResDto,
     },
   },
 };
