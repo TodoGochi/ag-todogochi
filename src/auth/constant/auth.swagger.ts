@@ -1,6 +1,7 @@
 import { SwaggerOptions } from 'src/common/decorators/swagger.decorator';
 import {
   EmailCheckResDto,
+  RefreshAccessTokenResDto,
   SignInKakaoResDto,
   SignInResDto,
   SignUpResDto,
@@ -48,6 +49,16 @@ export const AUTH_DOCS: Record<string, SwaggerOptions> = {
     response: {
       status: 201,
       type: SignInKakaoResDto,
+    },
+  },
+  REFRESH_ACCESS_TOKEN: {
+    operation: {
+      summary: 'Refresh access token',
+      description: 'This endpoint refreshes the access token.',
+    },
+    response: {
+      status: 201,
+      type: RefreshAccessTokenResDto,
     },
   },
 };

@@ -41,6 +41,8 @@ export class AuthController {
       secure: true,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
+    delete user.password;
+    delete user.refreshToken;
 
     return res.status(response.status).json({
       user,
@@ -67,6 +69,8 @@ export class AuthController {
       secure: true,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
+    delete user.password;
+    delete user.refreshToken;
 
     return res.status(response.status).json({
       user,
@@ -96,11 +100,28 @@ export class AuthController {
     });
   }
 
+  @Swagger(AUTH_DOCS.REFRESH_ACCESS_TOKEN)
   @Post('refresh')
   async refreshAccessToken(
     @Res() res: Response,
     @Cookie(COOKIE.REFRESH) oldRefreshToken: string,
   ) {
-    logger.log('oldRefreshToken', oldRefreshToken);
+    const response = await this.authService.refreshAccessToken({
+      oldRefreshToken,
+    });
+    const { user, tokens } = response.data;
+    res.cookie(COOKIE.REFRESH, tokens.refreshToken, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+    });
+    delete user.password;
+    delete user.refreshToken;
+
+    return res.status(response.status).json({
+      user,
+      accessToken: tokens.accessToken,
+    });
   }
 }

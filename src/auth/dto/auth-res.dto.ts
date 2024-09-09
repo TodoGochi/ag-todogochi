@@ -42,3 +42,5 @@ export class EmailCheckResDto {
 }
 
 export class SignInKakaoResDto extends SignUpResDto {}
+
+export class RefreshAccessTokenResDto extends SignUpResDto {}

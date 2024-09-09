@@ -38,4 +38,13 @@ export class AuthService {
 
     return { data: response.data, status: response.status };
   }
+
+  async refreshAccessToken(input: { oldRefreshToken: string }) {
+    const response = await this.userService.post({
+      path: '/auth/refresh',
+      data: input,
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }
