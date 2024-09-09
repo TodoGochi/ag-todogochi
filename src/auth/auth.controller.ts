@@ -10,6 +10,8 @@ import { Swagger } from 'src/common/decorators/swagger.decorator';
 import { AUTH_DOCS } from './constant/auth.swagger';
 import { REFRESH_TOKEN_MAX_AGE } from './constant/refresh-token-max-age.constant';
 import { ApiExcludeEndpoint } from '@nestjs/swagger';
+import { Cookie } from 'src/common/decorators/cookie.decorator';
+import { COOKIE } from 'src/common/constants/cookie.constant';
 
 @Swagger(AUTH_DOCS.AUTH_CONTROLLER)
 @Controller('auth')
@@ -49,7 +51,7 @@ export class AuthController {
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
-      secure: true,
+      secure: false,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
@@ -75,7 +77,7 @@ export class AuthController {
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
-      secure: true,
+      secure: false,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
@@ -85,4 +87,10 @@ export class AuthController {
     // });
     return res.redirect('https://todogochi.vercel.app/main');
   }
+
+  @Post('refresh')
+  async refreshAccessToken(
+    @Res() res: Response,
+    @Cookie(COOKIE.REFRESH) oldRefreshToken: string,
+  ) {}
 }
