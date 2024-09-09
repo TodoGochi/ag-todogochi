@@ -67,7 +67,7 @@ export class AuthController {
   @Swagger(AUTH_DOCS.SIGN_IN_KAKAO)
   @Post('sign-in/kakao')
   async signInKakao(@Body() body: SignInKakaoReqBodyDto, @Res() res: Response) {
-    // this.logger.log('sign-in/kakao incoming :: ', body);
+    logger.log('sign-in/kakao incoming :: ', body);
     const response = await this.authService.signInKakao(body);
     const { user, tokens } = response.data;
     // res.cookie('refreshToken', tokens.refreshToken, {

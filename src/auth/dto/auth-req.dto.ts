@@ -57,5 +57,5 @@ export class SignInReqBodyDto {
 export class SignInKakaoReqBodyDto {
   @ApiProperty({ example: 'authCode', description: 'authCode' })
   @IsString()
-  authCode: string;
+  code: string;
 }
