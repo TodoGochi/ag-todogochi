@@ -35,9 +35,10 @@ export class AuthController {
   async signUp(@Body() body: SignUpReqBodyDto, @Res() res: Response) {
     const response = await this.authService.signUp(body);
     const { user, tokens } = response.data;
-    res.cookie('refreshToken', tokens.refreshToken, {
+    res.cookie(COOKIE.REFRESH, tokens.refreshToken, {
       httpOnly: true,
-      sameSite: 'strict',
+      sameSite: 'none',
+      secure: true,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
@@ -60,7 +61,7 @@ export class AuthController {
   async signIn(@Body() body: SignInReqBodyDto, @Res() res: Response) {
     const response = await this.authService.signIn(body);
     const { user, tokens } = response.data;
-    res.cookie('refreshToken', tokens.refreshToken, {
+    res.cookie(COOKIE.REFRESH, tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -82,7 +83,7 @@ export class AuthController {
   ) {
     const response = await this.authService.signInKakao(req.query);
     const { user, tokens } = response.data;
-    res.cookie('refreshToken', tokens.refreshToken, {
+    res.cookie(COOKIE.REFRESH, tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -99,5 +100,7 @@ export class AuthController {
   async refreshAccessToken(
     @Res() res: Response,
     @Cookie(COOKIE.REFRESH) oldRefreshToken: string,
-  ) {}
+  ) {
+    logger.log('oldRefreshToken', oldRefreshToken);
+  }
 }
