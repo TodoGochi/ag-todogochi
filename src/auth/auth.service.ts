@@ -31,9 +31,9 @@ export class AuthService {
     return { data: response.data, status: response.status };
   }
 
-  async signInKakao(input: { code: string }) {
-    const response = await this.userService.post({
-      path: `/auth/sign-in/kakao?${objectToQuerystring(input)}`,
+  async signInKakao(input: Record<string, any>) {
+    const response = await this.userService.get({
+      path: `/auth/sign/callback?${objectToQuerystring(input)}`,
     });
 
     return { data: response.data, status: response.status };

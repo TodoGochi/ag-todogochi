@@ -65,19 +65,16 @@ export class AuthController {
   }
 
   @Swagger(AUTH_DOCS.SIGN_IN_KAKAO)
-  @Post('sign-in/kakao')
-  async signInKakao(@Body() body: SignInKakaoReqBodyDto, @Res() res: Response) {
-    logger.log('sign-in/kakao incoming :: ', body);
-    const response = await this.authService.signInKakao(body);
+  @Get('sign-in/kakao')
+  async signInKakao(@Req() req: Request, @Res() res: Response) {
+    const response = await this.authService.signInKakao(req.query);
     const { user, tokens } = response.data;
-    // res.cookie('refreshToken', tokens.refreshToken, {
-    //   httpOnly: true,
-    //   sameSite: 'none',
-    //   secure: true,
-    //   maxAge: REFRESH_TOKEN_MAX_AGE,
-    // });
-    // this.logger.log(response.data);
-    logger.log('response :: ', response.data);
+    res.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+    });
+
     return res.status(response.status).json({
       user,
       accessToken: tokens.accessToken,
