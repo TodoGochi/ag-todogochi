@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   EmailCheckReqBodyDto,
@@ -17,7 +17,10 @@ import { COOKIE } from 'src/common/constants/cookie.constant';
 @Swagger(AUTH_DOCS.AUTH_CONTROLLER)
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly logger: Logger,
+  ) {}
 
   @Swagger(AUTH_DOCS.SIGN_UP)
   @Post('sign-up')
@@ -65,6 +68,7 @@ export class AuthController {
   @Swagger(AUTH_DOCS.SIGN_IN_KAKAO)
   @Post('sign-in/kakao')
   async signInKakao(@Body() body: SignInKakaoReqBodyDto, @Res() res: Response) {
+    this.logger.log('sign-in/kakao incoming :: ', body);
     const response = await this.authService.signInKakao(body);
     const { user, tokens } = response.data;
     // res.cookie('refreshToken', tokens.refreshToken, {
@@ -73,7 +77,7 @@ export class AuthController {
     //   secure: true,
     //   maxAge: REFRESH_TOKEN_MAX_AGE,
     // });
-
+    this.logger.log(response.data);
     return res.status(response.status).json({
       user,
       accessToken: tokens.accessToken,
