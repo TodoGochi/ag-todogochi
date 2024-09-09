@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   async signInKakao(input: Record<string, any>) {
-    const response = await this.userService.get({
+    const response = await this.userService.post({
       path: `/auth/sign-in/kakao?${objectToQuerystring(input)}`,
     });
 
