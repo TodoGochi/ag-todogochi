@@ -50,8 +50,8 @@ export class AuthController {
     const { user, tokens } = response.data;
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
-      // sameSite: 'none',
-      // secure: false,
+      sameSite: 'none',
+      secure: true,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
@@ -76,16 +76,16 @@ export class AuthController {
     const { user, tokens } = response.data;
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
-      // sameSite: 'none',
-      // secure: false,
+      sameSite: 'none',
+      secure: true,
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
-    // return res.status(response.status).json({
-    //   user,
-    //   accessToken: tokens.accessToken,
-    // });
-    return res.redirect('https://todogochi.vercel.app/main');
+    return res.status(response.status).json({
+      user,
+      accessToken: tokens.accessToken,
+    });
+    // return res.redirect('https://todogochi.vercel.app/main');
   }
 
   @Post('refresh')
