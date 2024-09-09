@@ -75,7 +75,7 @@ export class AuthController {
   }
 
   @Swagger(AUTH_DOCS.SIGN_IN_KAKAO)
-  @Get('sign-in/kakao')
+  @Post('sign-in/kakao')
   async signInKakao(
     @Query('code') code: string,
     @Req() req: Request,
