@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Logger, Post, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Logger,
+  Post,
+  Query,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   EmailCheckReqBodyDto,
@@ -66,7 +75,11 @@ export class AuthController {
 
   @Swagger(AUTH_DOCS.SIGN_IN_KAKAO)
   @Get('sign-in/kakao')
-  async signInKakao(@Req() req: Request, @Res() res: Response) {
+  async signInKakao(
+    @Query('code') code: string,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
     const response = await this.authService.signInKakao(req.query);
     const { user, tokens } = response.data;
     res.cookie('refreshToken', tokens.refreshToken, {
