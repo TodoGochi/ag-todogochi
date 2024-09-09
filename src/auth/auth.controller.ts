@@ -67,12 +67,12 @@ export class AuthController {
   async signInKakao(@Body() body: SignInKakaoReqBodyDto, @Res() res: Response) {
     const response = await this.authService.signInKakao(body);
     const { user, tokens } = response.data;
-    res.cookie('refreshToken', tokens.refreshToken, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-      maxAge: REFRESH_TOKEN_MAX_AGE,
-    });
+    // res.cookie('refreshToken', tokens.refreshToken, {
+    //   httpOnly: true,
+    //   sameSite: 'none',
+    //   secure: true,
+    //   maxAge: REFRESH_TOKEN_MAX_AGE,
+    // });
 
     return res.status(response.status).json({
       user,
