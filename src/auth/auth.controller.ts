@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   EmailCheckReqBodyDto,
@@ -14,13 +14,12 @@ import { ApiExcludeEndpoint } from '@nestjs/swagger';
 import { Cookie } from 'src/common/decorators/cookie.decorator';
 import { COOKIE } from 'src/common/constants/cookie.constant';
 
+const logger = new Logger('AuthController');
+
 @Swagger(AUTH_DOCS.AUTH_CONTROLLER)
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    // private readonly logger: Logger,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Swagger(AUTH_DOCS.SIGN_UP)
   @Post('sign-up')
@@ -78,6 +77,7 @@ export class AuthController {
     //   maxAge: REFRESH_TOKEN_MAX_AGE,
     // });
     // this.logger.log(response.data);
+    logger.log('response :: ', response.data);
     return res.status(response.status).json({
       user,
       accessToken: tokens.accessToken,
