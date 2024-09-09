@@ -9,12 +9,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   setSwagger(app);
   app.enableCors({
-    origin: [
-      'http://localhost:13000',
-      'http://localhost:3000',
-      'https://todogochi-helloworlddogs223s-projects.vercel.app/',
-      'https://todogochi.vercel.app/',
-    ],
+    origin: 'https://todogochi.vercel.app',
+    methods: 'GET,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
   app.use(cookieParser());
