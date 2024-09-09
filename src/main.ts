@@ -9,7 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   setSwagger(app);
   app.enableCors({
-    origin: 'https://todogochi.vercel.app',
+    origin: [
+      'https://todogochi.vercel.app',
+      'http://localhost:3000',
+      'http://localhost:13000',
+    ],
     methods: 'GET,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
