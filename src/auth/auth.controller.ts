@@ -52,11 +52,10 @@ export class AuthController {
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
-    // return res.status(response.status).json({
-    //   user,
-    //   accessToken: tokens.accessToken,
-    // });
-    return res.redirect('https://todogochi.vercel.app/main');
+    return res.status(response.status).json({
+      user,
+      accessToken: tokens.accessToken,
+    });
   }
 
   @ApiExcludeEndpoint()
@@ -78,9 +77,10 @@ export class AuthController {
       maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
-    return res.status(response.status).json({
-      user,
-      accessToken: tokens.accessToken,
-    });
+    // return res.status(response.status).json({
+    //   user,
+    //   accessToken: tokens.accessToken,
+    // });
+    return res.redirect('https://todogochi.vercel.app/main');
   }
 }
