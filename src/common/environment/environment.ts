@@ -1,4 +1,11 @@
-import { IsIn, IsNumberString, IsString } from 'class-validator';
+import { plainToClass, Type } from 'class-transformer';
+import {
+  IsIn,
+  IsNumberString,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { JwtConfig } from './object-config/jwt.config';
 
 export class Environment {
   @IsIn(['production', 'test', 'development'])
@@ -12,4 +19,14 @@ export class Environment {
 
   @IsString()
   USER_SERVER_ADDR = process.env.USER_SERVER_ADDR;
+
+  // JWT
+  @ValidateNested()
+  @Type(() => JwtConfig)
+  JWT: JwtConfig = plainToClass(JwtConfig, {
+    accessSecret: process.env.JWT_ACCESS_SECRET,
+    accessExpiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
+    refreshSecret: process.env.JWT_REFRESH_SECRET,
+    refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
+  });
 }

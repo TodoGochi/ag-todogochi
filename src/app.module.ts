@@ -5,9 +5,10 @@ import { ServerModule } from './provider/server/server.module';
 import { HttpExceptionFilter } from './common/core/filters/http-exception.filter';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtAuthModule } from './provider/jwt-auth/jwt-auth.module';
 
 @Module({
-  imports: [ServerModule, UserModule, AuthModule],
+  imports: [ServerModule, UserModule, AuthModule, JwtAuthModule],
   controllers: [AppController],
   providers: [
     AppService,
