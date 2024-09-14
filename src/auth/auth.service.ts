@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Config } from 'src/common/environment/config';
 import { UserService as UserServer } from 'src/provider/server/services/user.service';
 import { objectToQuerystring } from 'src/utils/object-to-querystring';
 

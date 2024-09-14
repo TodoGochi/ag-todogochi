@@ -6,9 +6,10 @@ import { HttpExceptionFilter } from './common/core/filters/http-exception.filter
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthModule } from './provider/jwt-auth/jwt-auth.module';
+import { TodolistModule } from './todolist/todolist.module';
 
 @Module({
-  imports: [ServerModule, UserModule, AuthModule, JwtAuthModule],
+  imports: [ServerModule, UserModule, AuthModule, JwtAuthModule, TodolistModule],
   controllers: [AppController],
   providers: [
     AppService,

@@ -19,6 +19,8 @@ export class Environment {
 
   @IsString()
   USER_SERVER_ADDR = process.env.USER_SERVER_ADDR;
+  @IsString()
+  TODOLIST_SERVER_ADDR = process.env.TODOLIST_SERVER_ADDR;
 
   // JWT
   @ValidateNested()
