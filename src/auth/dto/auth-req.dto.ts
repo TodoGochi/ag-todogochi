@@ -10,10 +10,6 @@ export class SignUpReqBodyDto {
   @ApiProperty({ example: 'nickname', description: 'nickname' })
   @IsString()
   @Length(2, 15, { message: 'Nickname must be between 2 and 15 characters.' })
-  @Matches(/^[a-zA-Z0-9가-힣]*$/, {
-    message:
-      'Nickname can only contain letters, numbers, or Korean characters.',
-  })
   nickName: string;
 
   @ApiProperty({
