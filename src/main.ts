@@ -19,7 +19,7 @@ async function bootstrap() {
   });
   app.use(cookieParser());
   app.use(helmet());
-
+  console.log('test');
   const port = Config.getEnvironment().PORT;
   await app.listen(port);
 }
