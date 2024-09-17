@@ -32,8 +32,9 @@ export class CreateSpecificDayTodoListReqBodyDto {
     description: 'Target date in YYYYMMDD format',
     example: 20240916,
   })
+  @Min(19000101, { message: 'targetDate must be a valid date' })
+  @Max(99991231, { message: 'targetDate must be a valid date' })
   @IsInt({ message: 'targetDate must be a valid integer' })
-  @Matches(/^\d{8}$/, { message: 'targetDate must be in YYYYMMDD format' })
   targetDate: number;
 
   @ApiProperty({ example: '10:00', description: 'Target time (HH:mm)' })
