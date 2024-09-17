@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'ag-todogochi',
       script: 'npm',
-      args: ['run', 'start:dev'],
+      args: ['run', 'start:prod'],
     },
   ],
 };
