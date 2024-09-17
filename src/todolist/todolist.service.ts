@@ -35,4 +35,22 @@ export class TodolistService {
 
     return { data: response.data, status: response.status };
   }
+
+  async getTodoListsByDay(input: {
+    userId: number;
+    targetDate: number;
+    req: any;
+  }) {
+    if (
+      input.req.user.role < ROLE.ADMIN &&
+      input.req.user.userId !== input.userId
+    ) {
+      throw new ApiError('AG-0001');
+    }
+    const response = await this.todoListService.get({
+      path: `/todolist/${input.userId}/${input.targetDate}`,
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }

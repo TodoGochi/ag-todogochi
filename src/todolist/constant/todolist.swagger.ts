@@ -1,5 +1,8 @@
 import { SwaggerOptions } from 'src/common/decorators/swagger.decorator';
-import { CreateSpecificDayTodolistResDto } from '../dto/todolist-res.dto';
+import {
+  CreateSpecificDayTodolistResDto,
+  GetTodoListsByDayResDto,
+} from '../dto/todolist-res.dto';
 
 export const TODOLIST_DOCS: Record<string, SwaggerOptions> = {
   TODOLIST_CONTROLLER: {
@@ -14,6 +17,18 @@ export const TODOLIST_DOCS: Record<string, SwaggerOptions> = {
     response: {
       status: 201,
       type: CreateSpecificDayTodolistResDto,
+    },
+  },
+  GET_TODOLISTS_BY_DAY: {
+    operation: {
+      summary: 'Get todo lists by day',
+      description:
+        'This endpoint retrieves a list of todo lists for a specific day.',
+    },
+    bearerAuth: true,
+    response: {
+      status: 200,
+      type: GetTodoListsByDayResDto,
     },
   },
 };

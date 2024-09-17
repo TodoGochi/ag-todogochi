@@ -6,6 +6,8 @@ import {
   IsNumber,
   IsString,
   Matches,
+  Max,
+  Min,
 } from 'class-validator';
 import { ColorTagType } from '../constant/color-tag.type';
 import { Type } from 'class-transformer';
@@ -37,4 +39,24 @@ export class CreateSpecificDayTodoListReqBodyDto {
   @ApiProperty({ example: '10:00', description: 'Target time (HH:mm)' })
   @Matches(/^\d{2}:\d{2}$/, { message: 'Invalid time format (HH:mm required)' })
   targetTime: string;
+}
+
+export class GetTodoListsByDayReqParamDto {
+  @ApiProperty({
+    example: 1,
+    description: 'User ID',
+  })
+  @Type(() => Number)
+  @IsInt()
+  userId: number;
+
+  @ApiProperty({
+    example: 20240916,
+    description: 'Target date in YYYYMMDD format',
+  })
+  @Type(() => Number)
+  @IsInt({ message: 'targetDate must be a valid integer' })
+  @Min(19000101, { message: 'targetDate must be a valid date' })
+  @Max(99991231, { message: 'targetDate must be a valid date' })
+  targetDate: number;
 }
