@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  ArrayMinSize,
+  ArrayNotEmpty,
+  IsArray,
   IsDateString,
   IsEnum,
   IsInt,
@@ -60,4 +63,47 @@ export class GetTodoListsByDayReqParamDto {
   @Min(19000101, { message: 'targetDate must be a valid date' })
   @Max(99991231, { message: 'targetDate must be a valid date' })
   targetDate: number;
+}
+
+export class CreateWeeklyTodoListReqBodyDto {
+  @ApiProperty({
+    example: 1,
+    description: 'User ID',
+  })
+  @IsNumber()
+  userId: number;
+
+  @ApiProperty({
+    example: 'Buy groceries',
+    description: 'To-do text',
+  })
+  @IsString()
+  todoText: string;
+
+  @ApiProperty({
+    example: 'RED',
+    description: 'Color tag for the to-do item',
+  })
+  @IsString()
+  colorTag: ColorTagType;
+
+  @ApiProperty({
+    example: ['Monday', 'Wednesday', 'Friday'],
+    description: 'Days of the week when the to-do should occur',
+  })
+  @IsArray()
+  @ArrayNotEmpty({ message: 'Days array should not be empty' })
+  @ArrayMinSize(1, { message: 'At least one day is required' })
+  @Matches(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)$/, {
+    each: true,
+    message: 'Invalid day of the week',
+  })
+  days: string[];
+
+  @ApiProperty({
+    example: '10:00',
+    description: 'Target time in HH:mm format',
+  })
+  @Matches(/^\d{2}:\d{2}$/, { message: 'Invalid time format (HH:mm required)' })
+  targetTime: string;
 }

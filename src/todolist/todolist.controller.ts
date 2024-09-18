@@ -11,6 +11,7 @@ import {
 import { TodolistService } from './todolist.service';
 import {
   CreateSpecificDayTodoListReqBodyDto,
+  CreateWeeklyTodoListReqBodyDto,
   GetTodoListsByDayReqParamDto,
 } from './dto/todolist-req.dto';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
@@ -55,6 +56,23 @@ export class TodolistController {
     const response = await this.todoListService.getTodoListsByDay({
       userId: params.userId,
       targetDate: params.targetDate,
+      req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
+
+  @Swagger(TODOLIST_DOCS.CREATE_WEEKLY_TODOLIST)
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
+  @Post('weekly')
+  async createWeeklyTodoList(
+    @Body() body: CreateWeeklyTodoListReqBodyDto,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.todoListService.createWeeklyTodoList({
+      ...body,
       req,
     });
 

@@ -43,11 +43,3 @@ export class CreateSpecificDayTodolistResDto {
   })
   status: number;
 }
-
-export class GetTodoListsByDayResDto {
-  @ApiProperty({
-    type: [CreateSpecificDayTodolistResDto],
-    description: 'List of todos for a specific day',
-  })
-  todos: CreateSpecificDayTodolistResDto[];
-}

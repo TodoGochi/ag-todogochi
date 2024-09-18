@@ -29,4 +29,5 @@ async function bootstrap() {
   const port = Config.getEnvironment().PORT;
   await app.listen(port);
 }
+
 bootstrap();
