@@ -9,6 +9,7 @@ export const USER_DOCS: Record<string, SwaggerOptions> = {
       summary: 'Get coin transactions by user id',
       description: 'This endpoint retrieves coin transactions by user id.',
     },
+    bearerAuth: true,
     response: {
       status: 200,
       // TODO: Create a DTO for this response
