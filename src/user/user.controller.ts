@@ -10,7 +10,10 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Swagger } from 'src/common/decorators/swagger.decorator';
-import { UserIdReqParamDto } from './dto/user-req.dto';
+import {
+  CreateCoinTransactionReqBodyDto,
+  UserIdReqParamDto,
+} from './dto/user-req.dto';
 import { Response, Request } from 'express';
 import { USER_DOCS } from './constant/user.swagger';
 import { Role } from 'src/common/decorators/roles.decorator';
@@ -35,6 +38,23 @@ export class UserController {
     const response = await this.userService.getCoinTransactionsByUserId({
       userId: params.userId,
       req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
+
+  //TODO:: 나중에 보안생각해야함
+  @Swagger(USER_DOCS.CREATE_COIN_TRANSACTION)
+  @Post(':userId/coin-transactions')
+  async createCoinTransaction(
+    @Param() params: UserIdReqParamDto,
+    @Body() body: CreateCoinTransactionReqBodyDto,
+    @Res() res: Response,
+  ) {
+    const response = await this.userService.createCoinTransaction({
+      userId: params.userId,
+      changeAmount: body.changeAmount,
+      description: body.description,
     });
 
     return res.status(response.status).json(response.data);

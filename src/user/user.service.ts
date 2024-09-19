@@ -20,4 +20,20 @@ export class UserService {
 
     return { data: response.data, status: response.status };
   }
+
+  async createCoinTransaction(input: {
+    userId: number;
+    changeAmount: number;
+    description: string;
+  }) {
+    const response = await this.userService.post({
+      path: `/user/${input.userId}/coin-transactions`,
+      data: {
+        changeAmount: input.changeAmount,
+        description: input.description,
+      },
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }
