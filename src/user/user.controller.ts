@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Response } from 'express';
 import { Swagger } from 'src/common/decorators/swagger.decorator';
 import { UserIdReqParamDto } from './dto/user-req.dto';
 import { Response, Request } from 'express';
