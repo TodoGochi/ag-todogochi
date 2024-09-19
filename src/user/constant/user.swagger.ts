@@ -15,4 +15,13 @@ export const USER_DOCS: Record<string, SwaggerOptions> = {
       // TODO: Create a DTO for this response
     },
   },
+  CREATE_COIN_TRANSACTION: {
+    operation: {
+      summary: 'Create coin transaction',
+      description: 'This endpoint creates a coin transaction.',
+    },
+    response: {
+      status: 201,
+    },
+  },
 };
