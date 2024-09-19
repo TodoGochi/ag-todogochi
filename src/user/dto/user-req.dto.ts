@@ -11,14 +11,6 @@ export class UserIdReqParamDto {
 
 export class CreateCoinTransactionReqBodyDto {
   @ApiProperty({
-    example: 19,
-    description: 'ID of the user performing the coin transaction',
-  })
-  @Type(() => Number)
-  @IsInt()
-  userId: number;
-
-  @ApiProperty({
     example: -500,
     description:
       'Amount of coin change. Use a negative value for debit and a positive value for credit.',
