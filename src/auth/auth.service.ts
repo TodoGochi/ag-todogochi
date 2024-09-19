@@ -11,6 +11,7 @@ export class AuthService {
       path: '/auth/sign-up',
       data: input,
     });
+
     return { data: response.data, status: response.status };
   }
 
@@ -27,6 +28,7 @@ export class AuthService {
       path: '/auth/sign-in',
       data: input,
     });
+
     return { data: response.data, status: response.status };
   }
 

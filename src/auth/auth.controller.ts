@@ -1,18 +1,7 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Logger,
-  Post,
-  Query,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Post, Query, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   EmailCheckReqBodyDto,
-  SignInKakaoReqBodyDto,
   SignInReqBodyDto,
   SignUpReqBodyDto,
 } from './dto/auth-req.dto';
@@ -20,15 +9,8 @@ import { Response, Request } from 'express';
 import { Swagger } from 'src/common/decorators/swagger.decorator';
 import { AUTH_DOCS } from './constant/auth.swagger';
 import { REFRESH_TOKEN_MAX_AGE } from './constant/refresh-token-max-age.constant';
-import { ApiExcludeEndpoint } from '@nestjs/swagger';
 import { Cookie } from 'src/common/decorators/cookie.decorator';
 import { COOKIE } from 'src/common/constants/cookie.constant';
-import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
-import { RolesGuard } from 'src/common/core/guards/role.guard';
-import { Role } from 'src/common/decorators/roles.decorator';
-import { ROLE } from 'src/common/constants/role.constant';
-
-const logger = new Logger('AuthController');
 
 @Swagger(AUTH_DOCS.AUTH_CONTROLLER)
 @Controller('auth')
@@ -128,13 +110,5 @@ export class AuthController {
       user,
       accessToken: tokens.accessToken,
     });
-  }
-
-  @UseGuards(AccessTokenGuard, RolesGuard)
-  @Role(ROLE.MEMBER)
-  @Get('test')
-  async test(@Req() req: Request) {
-    // console.log(req['user']);
-    return 'test';
   }
 }
