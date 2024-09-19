@@ -11,7 +11,7 @@ export class UserIdReqParamDto {
 
 export class CreateCoinTransactionReqBodyDto {
   @ApiProperty({
-    example: 12345,
+    example: 19,
     description: 'ID of the user performing the coin transaction',
   })
   @Type(() => Number)
@@ -28,7 +28,7 @@ export class CreateCoinTransactionReqBodyDto {
   changeAmount: number;
 
   @ApiProperty({
-    example: 'purchase_item',
+    example: 'Complete ColorTag: Red',
     description: 'Description of the coin transaction reason',
   })
   @IsString()
