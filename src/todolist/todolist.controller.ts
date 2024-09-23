@@ -13,6 +13,7 @@ import {
   CreateSpecificDayTodoListReqBodyDto,
   CreateWeeklyTodoListReqBodyDto,
   GetTodoListsByDayReqParamDto,
+  TodoIdReqParamDto,
 } from './dto/todolist-req.dto';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
@@ -73,6 +74,20 @@ export class TodolistController {
   ) {
     const response = await this.todoListService.createWeeklyTodoList({
       ...body,
+      req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
+
+  @Post('complete/:todoId')
+  async completeTodoList(
+    @Param() params: TodoIdReqParamDto,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.todoListService.completeTodoList({
+      todoId: params.todoId,
       req,
     });
 

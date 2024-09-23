@@ -81,4 +81,12 @@ export class TodolistService {
 
     return { data: response.data, status: response.status };
   }
+
+  async completeTodoList(input: { todoId: number; req: any }) {
+    const response = await this.todoListService.post({
+      path: `/todolist/complete/${input.todoId}`,
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }
