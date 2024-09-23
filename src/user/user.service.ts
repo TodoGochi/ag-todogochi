@@ -36,4 +36,12 @@ export class UserService {
 
     return { data: response.data, status: response.status };
   }
+
+  async getUserByToken(req: any) {
+    const response = await this.userService.get({
+      path: `/user/${req.user.userId}`,
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }

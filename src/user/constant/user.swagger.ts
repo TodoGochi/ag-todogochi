@@ -1,3 +1,4 @@
+import { SignUpResDto } from 'src/auth/dto/auth-res.dto';
 import { SwaggerOptions } from 'src/common/decorators/swagger.decorator';
 
 export const USER_DOCS: Record<string, SwaggerOptions> = {
@@ -22,6 +23,17 @@ export const USER_DOCS: Record<string, SwaggerOptions> = {
     },
     response: {
       status: 201,
+    },
+  },
+  GET_USER_BY_TOKEN: {
+    operation: {
+      summary: 'Get user by token',
+      description: 'This endpoint retrieves user by token.',
+    },
+    bearerAuth: true,
+    response: {
+      status: 200,
+      type: SignUpResDto,
     },
   },
 };

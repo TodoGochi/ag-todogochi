@@ -59,4 +59,14 @@ export class UserController {
 
     return res.status(response.status).json(response.data);
   }
+
+  @Swagger(USER_DOCS.GET_USER_BY_TOKEN)
+  @UseGuards(AccessTokenGuard)
+  @Get()
+  async getUserByToken(@Req() req: Request, @Res() res: Response) {
+    const response = await this.userService.getUserByToken(req);
+    delete response.data.password;
+
+    return res.status(response.status).json(response.data);
+  }
 }
