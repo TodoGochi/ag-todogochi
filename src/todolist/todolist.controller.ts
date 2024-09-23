@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 import { TodolistService } from './todolist.service';
 import {
+  CompleteTodoListReqParamDto,
   CreateSpecificDayTodoListReqBodyDto,
   CreateWeeklyTodoListReqBodyDto,
   GetTodoListsByDayReqParamDto,
-  TodoIdReqParamDto,
 } from './dto/todolist-req.dto';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
@@ -80,13 +80,16 @@ export class TodolistController {
     return res.status(response.status).json(response.data);
   }
 
-  @Post('complete/:todoId')
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
+  @Post('complete/:userId/:todoId')
   async completeTodoList(
-    @Param() params: TodoIdReqParamDto,
+    @Param() params: CompleteTodoListReqParamDto,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.todoListService.completeTodoList({
+      userId: params.userId,
       todoId: params.todoId,
       req,
     });

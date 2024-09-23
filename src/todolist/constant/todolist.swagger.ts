@@ -39,4 +39,14 @@ export const TODOLIST_DOCS: Record<string, SwaggerOptions> = {
       type: [CreateSpecificDayTodolistResDto],
     },
   },
+  COMPLETE_TODOLIST: {
+    operation: {
+      summary: 'Complete todolist',
+      description: 'This endpoint completes a todolist.',
+    },
+    bearerAuth: true,
+    response: {
+      status: 200,
+    },
+  },
 };

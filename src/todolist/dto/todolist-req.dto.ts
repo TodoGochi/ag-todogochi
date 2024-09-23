@@ -108,7 +108,7 @@ export class CreateWeeklyTodoListReqBodyDto {
   targetTime: string;
 }
 
-export class TodoIdReqParamDto {
+export class CompleteTodoListReqParamDto {
   @ApiProperty({
     example: 1,
     description: 'TodoList ID',
@@ -116,4 +116,12 @@ export class TodoIdReqParamDto {
   @Type(() => Number)
   @IsInt()
   todoId: number;
+
+  @ApiProperty({
+    example: 1,
+    description: 'User ID',
+  })
+  @Type(() => Number)
+  @IsInt()
+  userId: number;
 }

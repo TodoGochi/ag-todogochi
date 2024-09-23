@@ -82,7 +82,13 @@ export class TodolistService {
     return { data: response.data, status: response.status };
   }
 
-  async completeTodoList(input: { todoId: number; req: any }) {
+  async completeTodoList(input: { userId: number; todoId: number; req: any }) {
+    if (
+      input.req.user.role < ROLE.ADMIN &&
+      input.req.user.userId !== input.userId
+    ) {
+      throw new ApiError('AG-0001');
+    }
     const response = await this.todoListService.post({
       path: `/todolist/complete/${input.todoId}`,
     });
