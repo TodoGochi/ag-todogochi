@@ -13,6 +13,7 @@ export class Config {
     if (!Config.instance) {
       const envFilePath = '.env';
       dotenvConfig({ path: envFilePath });
+
       Config.instance = Config.validate(process.env);
       Config.instance = Object.freeze(Config.instance);
     }

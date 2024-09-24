@@ -22,6 +22,9 @@ export class Environment {
   @IsString()
   TODOLIST_SERVER_ADDR = process.env.TODOLIST_SERVER_ADDR;
 
+  @IsString()
+  TAMAGOTCHI_SERVER_ADDR = process.env.TAMAGOTCH_SERVER_ADDR;
+
   // JWT
   @ValidateNested()
   @Type(() => JwtConfig)

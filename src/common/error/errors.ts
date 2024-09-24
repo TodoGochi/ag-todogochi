@@ -16,4 +16,9 @@ export const ERRORS = {
     message: 'Invalid access token',
     statusCode: HttpStatusCode.Unauthorized,
   },
+  'AG-0003': {
+    errorCode: 'AG-0003',
+    message: 'Not Enough Coins',
+    statusCode: HttpStatusCode.Unauthorized,
+  },
 };

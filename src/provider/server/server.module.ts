@@ -4,6 +4,7 @@ import { UserService } from './services/user.service';
 import axios from 'axios';
 import { Config } from 'src/common/environment/config';
 import { TodoListService } from './services/todolist.service';
+import { TamagotchiService } from './services/tamagotchi.service';
 
 @Module({
   imports: [HttpModule],
@@ -26,7 +27,16 @@ import { TodoListService } from './services/todolist.service';
         });
       },
     },
+    TamagotchiService,
+    {
+      provide: 'TAMAGOTCHI_SERVER',
+      useFactory: () => {
+        return axios.create({
+          baseURL: Config.getEnvironment().TAMAGOTCHI_SERVER_ADDR,
+        });
+      },
+    },
   ],
-  exports: [UserService, TodoListService],
+  exports: [UserService, TodoListService, TamagotchiService],
 })
 export class ServerModule {}
