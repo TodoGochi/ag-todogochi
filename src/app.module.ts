@@ -7,9 +7,17 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthModule } from './provider/jwt-auth/jwt-auth.module';
 import { TodolistModule } from './todolist/todolist.module';
+import { TamagotchiModule } from './tamagotchi/tamagotchi.module';
 
 @Module({
-  imports: [ServerModule, UserModule, AuthModule, JwtAuthModule, TodolistModule],
+  imports: [
+    ServerModule,
+    UserModule,
+    AuthModule,
+    JwtAuthModule,
+    TodolistModule,
+    TamagotchiModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
