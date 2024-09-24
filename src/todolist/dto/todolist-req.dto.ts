@@ -125,3 +125,33 @@ export class CompleteTodoListReqParamDto {
   @IsInt()
   userId: number;
 }
+
+export class GetTodoListsByPeriodReqParamDto {
+  @ApiProperty({
+    example: 1,
+    description: 'User ID',
+  })
+  @Type(() => Number)
+  @IsInt()
+  userId: number;
+
+  @ApiProperty({
+    example: 20240916,
+    description: 'startDate in YYYYMMDD format',
+  })
+  @Type(() => Number)
+  @IsInt()
+  @Min(19000101, { message: 'startDate must be a valid date' })
+  @Max(99991231, { message: 'startDate must be a valid date' })
+  startDate: number;
+
+  @ApiProperty({
+    example: 20240918,
+    description: 'endDate in YYYYMMDD format',
+  })
+  @Type(() => Number)
+  @IsInt()
+  @Min(19000101, { message: 'endDate must be a valid date' })
+  @Max(99991231, { message: 'endDate must be a valid date' })
+  endDate: number;
+}
