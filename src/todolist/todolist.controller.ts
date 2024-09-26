@@ -14,6 +14,7 @@ import {
   CreateSpecificDayTodoListReqBodyDto,
   CreateWeeklyTodoListReqBodyDto,
   GetTodoListsByDayReqParamDto,
+  GetTodoListsByPeriodReqParamDto,
 } from './dto/todolist-req.dto';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
@@ -91,6 +92,24 @@ export class TodolistController {
     const response = await this.todoListService.completeTodoList({
       userId: params.userId,
       todoId: params.todoId,
+      req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
+
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
+  @Get('period/:userId/:startDate/:endDate')
+  async getTodoListsByPeriod(
+    @Param() params: GetTodoListsByPeriodReqParamDto,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.todoListService.getTodoListsByPeriod({
+      userId: params.userId,
+      startDate: params.startDate,
+      endDate: params.endDate,
       req,
     });
 

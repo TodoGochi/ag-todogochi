@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   ArrayNotEmpty,
@@ -7,6 +7,7 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   Matches,
   Max,
@@ -40,7 +41,8 @@ export class CreateSpecificDayTodoListReqBodyDto {
   @IsInt({ message: 'targetDate must be a valid integer' })
   targetDate: number;
 
-  @ApiProperty({ example: '10:00', description: 'Target time (HH:mm)' })
+  @ApiPropertyOptional({ example: '10:00', description: 'Target time (HH:mm)' })
+  @IsOptional()
   @Matches(/^\d{2}:\d{2}$/, { message: 'Invalid time format (HH:mm required)' })
   targetTime: string;
 }
@@ -124,4 +126,34 @@ export class CompleteTodoListReqParamDto {
   @Type(() => Number)
   @IsInt()
   userId: number;
+}
+
+export class GetTodoListsByPeriodReqParamDto {
+  @ApiProperty({
+    example: 1,
+    description: 'User ID',
+  })
+  @Type(() => Number)
+  @IsInt()
+  userId: number;
+
+  @ApiProperty({
+    example: 20240916,
+    description: 'startDate in YYYYMMDD format',
+  })
+  @Type(() => Number)
+  @IsInt()
+  @Min(19000101, { message: 'startDate must be a valid date' })
+  @Max(99991231, { message: 'startDate must be a valid date' })
+  startDate: number;
+
+  @ApiProperty({
+    example: 20240918,
+    description: 'endDate in YYYYMMDD format',
+  })
+  @Type(() => Number)
+  @IsInt()
+  @Min(19000101, { message: 'endDate must be a valid date' })
+  @Max(99991231, { message: 'endDate must be a valid date' })
+  endDate: number;
 }

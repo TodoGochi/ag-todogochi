@@ -13,7 +13,7 @@ export class TodolistService {
     todoText: string;
     colorTag: ColorTagType;
     targetDate: number;
-    targetTime: string;
+    targetTime?: string;
     req: any;
   }) {
     if (
@@ -91,6 +91,25 @@ export class TodolistService {
     }
     const response = await this.todoListService.post({
       path: `/todolist/complete/${input.todoId}`,
+    });
+
+    return { data: response.data, status: response.status };
+  }
+
+  async getTodoListsByPeriod(input: {
+    userId: number;
+    startDate: number;
+    endDate: number;
+    req: any;
+  }) {
+    if (
+      input.req.user.role < ROLE.ADMIN &&
+      input.req.user.userId !== input.userId
+    ) {
+      throw new ApiError('AG-0001');
+    }
+    const response = await this.todoListService.get({
+      path: `/todolist/period/${input.userId}/${input.startDate}/${input.endDate}`,
     });
 
     return { data: response.data, status: response.status };
