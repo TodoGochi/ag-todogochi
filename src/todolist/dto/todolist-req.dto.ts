@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   ArrayNotEmpty,
@@ -7,6 +7,7 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   Matches,
   Max,
@@ -40,7 +41,8 @@ export class CreateSpecificDayTodoListReqBodyDto {
   @IsInt({ message: 'targetDate must be a valid integer' })
   targetDate: number;
 
-  @ApiProperty({ example: '10:00', description: 'Target time (HH:mm)' })
+  @ApiPropertyOptional({ example: '10:00', description: 'Target time (HH:mm)' })
+  @IsOptional()
   @Matches(/^\d{2}:\d{2}$/, { message: 'Invalid time format (HH:mm required)' })
   targetTime: string;
 }

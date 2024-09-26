@@ -13,7 +13,7 @@ export class TodolistService {
     todoText: string;
     colorTag: ColorTagType;
     targetDate: number;
-    targetTime: string;
+    targetTime?: string;
     req: any;
   }) {
     if (
