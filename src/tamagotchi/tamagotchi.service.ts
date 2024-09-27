@@ -32,12 +32,12 @@ export class TamagotchiService {
 
   // Get Tamagotchi status (userId comes from body)
   async getTamagotchi(input: { userId: number; req: any }) {
-    // if (
-    //   input.req.user.role < ROLE.ADMIN &&
-    //   input.req.user.userId !== input.userId
-    // ) {
-    //   throw new ApiError('AG-0001');
-    // }
+    if (
+      input.req.user.role < ROLE.ADMIN &&
+      input.req.user.userId !== input.userId
+    ) {
+      throw new ApiError('AG-0001');
+    }
 
     const response = await this.tamagotchiService.get({
       path: `/tamagotchi/${input.userId}`,

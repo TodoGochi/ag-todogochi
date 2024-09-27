@@ -46,8 +46,8 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.GET_TAMAGOTCHI)
-  // @UseGuards(AccessTokenGuard, RolesGuard)
-  // @Role(ROLE.MEMBER)
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
   @Get(':id/status')
   async getTamagotchi(
     @Param('id') id: number,
