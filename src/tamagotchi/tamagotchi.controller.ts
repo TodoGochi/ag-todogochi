@@ -7,6 +7,7 @@ import {
   UseGuards,
   Get,
   UseInterceptors,
+  Param,
 } from '@nestjs/common';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
@@ -45,16 +46,16 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.GET_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
-  @Role(ROLE.MEMBER)
-  @Get('status')
+  // @UseGuards(AccessTokenGuard, RolesGuard)
+  // @Role(ROLE.MEMBER)
+  @Get(':id/status')
   async getTamagotchi(
-    @Body() body: TamagotchiReqDto,
+    @Param('id') id: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.getTamagotchi({
-      ...body,
+      userId: id,
       req,
     });
     return res.status(response.status).json(response.data);
