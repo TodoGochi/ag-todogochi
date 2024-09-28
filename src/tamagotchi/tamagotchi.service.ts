@@ -40,7 +40,22 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.get({
-      path: `/tamagotchi/${input.userId}`,
+      path: `/tamagotchi/${input.userId}/status`,
+    });
+
+    return { data: response.data, status: response.status };
+  }
+
+  async getLevelProgress(input: { userId: number; req: any }) {
+    if (
+      input.req.user.role < ROLE.ADMIN &&
+      input.req.user.userId !== input.userId
+    ) {
+      throw new ApiError('AG-0001');
+    }
+
+    const response = await this.tamagotchiService.get({
+      path: `/tamagotchi/${input.userId}/level-progress`,
     });
 
     return { data: response.data, status: response.status };

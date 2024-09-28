@@ -49,17 +49,14 @@ export class PlayResponseDto {
 
   @ApiProperty({ example: 1, description: 'Hunger level of Tamagotchi' })
   @Type(() => Number)
-  @IsNumber({}, { message: 'Hunger must be a number' })
   hunger: number;
 
   @ApiProperty({ example: 100, description: 'Coin balance of user' })
   @Type(() => Number)
-  @IsNumber({}, { message: 'Coin must be a number' })
   coin: number;
 
   @ApiProperty({ example: 0, description: 'Amount of coins changed' })
   @Type(() => Number)
-  @IsNumber({}, { message: 'ChangeAmount must be a number' })
   changeAmount: number;
 }
 
@@ -110,4 +107,11 @@ export class TamagotchiResDto {
   @ValidateNested()
   @Type(() => ExperienceDto)
   experience: ExperienceDto;
+}
+
+export class LevelProgressResDto {
+  @ApiProperty({ example: 47, description: '레벨업까지 47시간' })
+  hour: number;
+  @ApiProperty({ example: 6, description: '레벨업까지 6분' })
+  min: number;
 }

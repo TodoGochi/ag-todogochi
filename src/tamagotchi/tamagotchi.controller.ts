@@ -61,6 +61,22 @@ export class TamagotchiController {
     return res.status(response.status).json(response.data);
   }
 
+  @Swagger(TAMAGOTCHI_DOCS.GET_LEVELPROGRESS)
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
+  @Get(':id/level-progress')
+  async getLevelProgress(
+    @Param('id') id: number,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.tamagotchiService.getLevelProgress({
+      userId: id,
+      req,
+    });
+    return res.status(response.status).json(response.data);
+  }
+
   @Swagger(TAMAGOTCHI_DOCS.FEED_TAMAGOTCHI)
   @UseGuards(AccessTokenGuard, RolesGuard)
   @Role(ROLE.MEMBER)

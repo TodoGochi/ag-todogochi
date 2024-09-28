@@ -1,5 +1,9 @@
 import { SwaggerOptions } from 'src/common/decorators/swagger.decorator';
-import { PlayResponseDto, TamagotchiResDto } from '../dto/tamagotchi-res.dto';
+import {
+  PlayResponseDto,
+  TamagotchiResDto,
+  LevelProgressResDto,
+} from '../dto/tamagotchi-res.dto';
 
 export const TAMAGOTCHI_DOCS: Record<string, SwaggerOptions> = {
   TAMAGOTCHI_CONTROLLER: {
@@ -25,6 +29,17 @@ export const TAMAGOTCHI_DOCS: Record<string, SwaggerOptions> = {
     response: {
       status: 200,
       type: TamagotchiResDto,
+    },
+  },
+  GET_LEVELPROGRESS: {
+    operation: {
+      summary: 'get tamagotchi level progress',
+      description: 'This endpoint retrieves remaining time to get level up',
+    },
+    bearerAuth: true,
+    response: {
+      status: 200,
+      type: LevelProgressResDto,
     },
   },
   FEED_TAMAGOTCHI: {
