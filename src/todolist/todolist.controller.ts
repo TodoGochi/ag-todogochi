@@ -81,6 +81,7 @@ export class TodolistController {
     return res.status(response.status).json(response.data);
   }
 
+  @Swagger(TODOLIST_DOCS.COMPLETE_TODOLIST)
   @UseGuards(AccessTokenGuard, RolesGuard)
   @Role(ROLE.MEMBER)
   @Post('complete/:userId/:todoId')
