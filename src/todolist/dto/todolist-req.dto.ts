@@ -128,7 +128,7 @@ export class CompleteTodoListReqParamDto {
   userId: number;
 }
 
-export class GetTodoListsByPeriodReqParamDto {
+export class GetTodoListsByPeriodReqQueryDto {
   @ApiProperty({
     example: 1,
     description: 'User ID',
