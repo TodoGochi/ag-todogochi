@@ -21,4 +21,9 @@ export const ERRORS = {
     message: 'Not Enough Coins',
     statusCode: HttpStatusCode.Unauthorized,
   },
+  'AG-0004': {
+    errorCode: 'AG-0004',
+    message: 'User Not Found',
+    statusCode: HttpStatusCode.NotFound,
+  },
 };

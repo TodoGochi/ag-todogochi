@@ -48,6 +48,13 @@ export class CoinCheckInterceptor implements NestInterceptor {
 
       const coinBalance = response.data.coin;
 
+      if (coinBalance == undefined) {
+        throw new ApiError('AG-0004');
+      }
+
+      console.log('보유코인개수', coinBalance);
+      console.log('필요코인개수', requiredCoins);
+
       // 필요한 코인 개수 이상인지 확인
       if (coinBalance < requiredCoins) {
         throw new ApiError('AG-0003');
@@ -66,6 +73,12 @@ export class CoinCheckInterceptor implements NestInterceptor {
       return next.handle();
     } catch (error) {
       // 에러 처리
+      if (error instanceof ApiError) {
+        // ApiError는 그대로 다시 던집니다
+        return throwError(() => error);
+      }
+
+      //예상치 못한 에러 처리
       console.error('Error in coin check:', error.message);
       return throwError(() => new ApiError('AG-0000'));
     }
