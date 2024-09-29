@@ -19,7 +19,7 @@ export const ERRORS = {
   'AG-0003': {
     errorCode: 'AG-0003',
     message: 'Not Enough Coins',
-    statusCode: HttpStatusCode.Unauthorized,
+    statusCode: HttpStatusCode.Forbidden,
   },
   'AG-0004': {
     errorCode: 'AG-0004',
