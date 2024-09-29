@@ -43,7 +43,7 @@ export class CoinCheckInterceptor implements NestInterceptor {
     try {
       // 외부 서버로 코인 정보 요청
       const response = await this.userService.get({
-        path: `/user/${userId}/coin-status`,
+        path: `/user/${userId}`,
       });
 
       const coinBalance = response.data.coin;
