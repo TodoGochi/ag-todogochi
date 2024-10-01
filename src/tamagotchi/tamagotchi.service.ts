@@ -46,7 +46,11 @@ export class TamagotchiService {
     return { data: response.data, status: response.status };
   }
 
-  async getLevelProgress(input: { userId: number; req: any }) {
+  async getLevelProgress(input: {
+    TamagotchiId: number;
+    userId: number;
+    req: any;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -55,14 +59,18 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.get({
-      path: `/tamagotchi/${input.userId}/level-progress`,
+      path: `/tamagotchi/${input.TamagotchiId}/level-progress`,
     });
 
     return { data: response.data, status: response.status };
   }
 
   // Feed Tamagotchi
-  async feedTamagotchi(input: { userId: number; req: any }) {
+  async feedTamagotchi(input: {
+    userId: number;
+    req: any;
+    TamagotchiId: number;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -71,7 +79,7 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.post({
-      path: '/tamagotchi/feed',
+      path: `/tamagotchi/${input.TamagotchiId}/feed`,
       data: {
         userId: input.userId,
       },
@@ -81,7 +89,11 @@ export class TamagotchiService {
   }
 
   // Pet Tamagotchi
-  async petTamagotchi(input: { userId: number; req: any }) {
+  async petTamagotchi(input: {
+    userId: number;
+    req: any;
+    TamagotchiId: number;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -90,7 +102,7 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.post({
-      path: '/tamagotchi/pet',
+      path: `/tamagotchi/${input.TamagotchiId}/pet`,
       data: {
         userId: input.userId,
       },
@@ -100,7 +112,11 @@ export class TamagotchiService {
   }
 
   // Cure Tamagotchi
-  async cureTamagotchi(input: { userId: number; req: any }) {
+  async cureTamagotchi(input: {
+    userId: number;
+    req: any;
+    TamagotchiId: number;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -109,7 +125,7 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.post({
-      path: '/tamagotchi/cure',
+      path: `/tamagotchi/${input.TamagotchiId}/cure`,
       data: {
         userId: input.userId,
       },
@@ -119,7 +135,11 @@ export class TamagotchiService {
   }
 
   // Resurrect Tamagotchi
-  async resurrectTamagotchi(input: { userId: number; req: any }) {
+  async resurrectTamagotchi(input: {
+    userId: number;
+    req: any;
+    TamagotchiId: number;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -128,7 +148,7 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.post({
-      path: '/tamagotchi/resurrect',
+      path: `/tamagotchi/${input.TamagotchiId}/resurrect`,
       data: {
         userId: input.userId,
       },
@@ -138,7 +158,11 @@ export class TamagotchiService {
   }
 
   // Restart Tamagotchi
-  async restartTamagotchi(input: { userId: number; req: any }) {
+  async restartTamagotchi(input: {
+    userId: number;
+    req: any;
+    TamagotchiId: number;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -147,7 +171,7 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.post({
-      path: '/tamagotchi/restart',
+      path: `/tamagotchi/${input.TamagotchiId}/restart`,
       data: {
         userId: input.userId,
       },
@@ -157,7 +181,11 @@ export class TamagotchiService {
   }
 
   // Play with Tamagotchi
-  async playTamagotchi(input: { userId: number; req: any }) {
+  async playTamagotchi(input: {
+    userId: number;
+    req: any;
+    TamagotchiId: number;
+  }) {
     if (
       input.req.user.role < ROLE.ADMIN &&
       input.req.user.userId !== input.userId
@@ -166,7 +194,7 @@ export class TamagotchiService {
     }
 
     const response = await this.tamagotchiService.post({
-      path: '/tamagotchi/play',
+      path: `/tamagotchi/${input.TamagotchiId}play`,
       data: {
         userId: input.userId,
       },
