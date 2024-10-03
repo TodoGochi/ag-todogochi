@@ -150,7 +150,7 @@ export class TodolistService {
       throw new ApiError('AG-0001');
     }
     const response = await this.todoListService.delete({
-      path: `/todolist/delete/${input.todoId}&userId=${input.userId}`,
+      path: `/todolist/delete/${input.todoId}?userId=${input.userId}`,
     });
 
     return { data: response.data, status: response.status };

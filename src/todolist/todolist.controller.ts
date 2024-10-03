@@ -141,6 +141,7 @@ export class TodolistController {
     return res.status(response.status).json(response.data);
   }
 
+  @Swagger(TODOLIST_DOCS.DELETE_TODOLIST)
   @UseGuards(AccessTokenGuard, RolesGuard)
   @Role(ROLE.MEMBER)
   @Delete('delete/:todoId')
