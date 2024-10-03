@@ -67,12 +67,10 @@ export class TamagotchiController {
   @Get(':id/level-progress')
   async getLevelProgress(
     @Param('id') id: number,
-    @Body() body: TamagotchiReqDto,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.getLevelProgress({
-      ...body,
       TamagotchiId: id,
       req,
     });
