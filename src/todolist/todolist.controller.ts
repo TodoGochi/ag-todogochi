@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -19,6 +20,7 @@ import {
   GetTodoListsByPeriodReqQueryDto,
   TodoIdReqParamDto,
   UpdateTodoListReqBodyDto,
+  UserIdReqQueryDto,
 } from './dto/todolist-req.dto';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
@@ -133,6 +135,24 @@ export class TodolistController {
     const response = await this.todoListService.updateTodoList({
       todoId: params.todoId,
       ...body,
+      req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
+
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
+  @Delete('delete/:todoId')
+  async deleteTodoList(
+    @Param() params: TodoIdReqParamDto,
+    @Query() query: UserIdReqQueryDto,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.todoListService.deleteTodoList({
+      todoId: params.todoId,
+      userId: query.userId,
       req,
     });
 

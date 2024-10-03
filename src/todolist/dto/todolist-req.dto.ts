@@ -202,3 +202,13 @@ export class UpdateTodoListReqBodyDto {
   @Matches(/^\d{2}:\d{2}$/, { message: 'Invalid time format (HH:mm required)' })
   targetTime: string;
 }
+
+export class UserIdReqQueryDto {
+  @ApiProperty({
+    example: 1,
+    description: 'User ID',
+  })
+  @Type(() => Number)
+  @IsInt()
+  userId: number;
+}
