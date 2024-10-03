@@ -157,3 +157,48 @@ export class GetTodoListsByPeriodReqQueryDto {
   @Max(99991231, { message: 'endDate must be a valid date' })
   endDate: number;
 }
+
+export class TodoIdReqParamDto {
+  @ApiProperty({
+    example: 1,
+    description: 'TodoList ID',
+  })
+  @Type(() => Number)
+  @IsInt()
+  todoId: number;
+}
+
+export class UpdateTodoListReqBodyDto {
+  @ApiProperty({ example: 1, description: 'User ID' })
+  @IsNumber()
+  userId: number;
+
+  @IsOptional()
+  @ApiProperty({ example: 'Buy groceries', description: 'To-do text' })
+  @IsString()
+  todoText: string;
+
+  @IsOptional()
+  @ApiProperty({ example: 'RED', description: 'Color tag for to-do item' })
+  @IsString()
+  @Matches(/^(RED|ORANGE|YELLOW|GREEN|BLUE|INDIGO|GRAY)$/, {
+    message: 'Invalid color tag',
+  })
+  colorTag: ColorTagType;
+
+  @IsOptional()
+  @ApiProperty({
+    description: 'Target date in YYYYMMDD format',
+    example: 20240916,
+  })
+  @Min(19000101, { message: 'targetDate must be a valid date' })
+  @Max(99991231, { message: 'targetDate must be a valid date' })
+  @IsInt({ message: 'targetDate must be a valid integer' })
+  targetDate: number;
+
+  @IsOptional()
+  @ApiPropertyOptional({ example: '10:00', description: 'Target time (HH:mm)' })
+  @IsOptional()
+  @Matches(/^\d{2}:\d{2}$/, { message: 'Invalid time format (HH:mm required)' })
+  targetTime: string;
+}

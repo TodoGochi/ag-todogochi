@@ -114,4 +114,31 @@ export class TodolistService {
 
     return { data: response.data, status: response.status };
   }
+
+  async updateTodoList(input: {
+    userId: number;
+    todoId: number;
+    todoText: string;
+    colorTag: ColorTagType;
+    targetTime: string;
+    req: any;
+  }) {
+    if (
+      input.req.user.role < ROLE.ADMIN &&
+      input.req.user.userId !== input.userId
+    ) {
+      throw new ApiError('AG-0001');
+    }
+    const response = await this.todoListService.put({
+      path: `/todolist/update/${input.todoId}`,
+      data: {
+        userId: input.userId,
+        todoText: input.todoText,
+        colorTag: input.colorTag,
+        targetTime: input.targetTime,
+      },
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }

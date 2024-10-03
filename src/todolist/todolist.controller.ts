@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   Req,
   Res,
@@ -16,6 +17,8 @@ import {
   CreateWeeklyTodoListReqBodyDto,
   GetTodoListsByDayReqParamDto,
   GetTodoListsByPeriodReqQueryDto,
+  TodoIdReqParamDto,
+  UpdateTodoListReqBodyDto,
 } from './dto/todolist-req.dto';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
@@ -112,6 +115,24 @@ export class TodolistController {
       userId: query.userId,
       startDate: query.startDate,
       endDate: query.endDate,
+      req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
+
+  @UseGuards(AccessTokenGuard, RolesGuard)
+  @Role(ROLE.MEMBER)
+  @Put('update/:todoId')
+  async updateTodoList(
+    @Param() params: TodoIdReqParamDto,
+    @Body() body: UpdateTodoListReqBodyDto,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.todoListService.updateTodoList({
+      todoId: params.todoId,
+      ...body,
       req,
     });
 
