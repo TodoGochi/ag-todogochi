@@ -47,10 +47,6 @@ export class TamagotchiService {
   }
 
   async getLevelProgress(input: { TamagotchiId: number; req: any }) {
-    if (input.req.user.role < ROLE.ADMIN) {
-      throw new ApiError('AG-0001');
-    }
-
     const response = await this.tamagotchiService.get({
       path: `/tamagotchi/${input.TamagotchiId}/level-progress`,
     });
