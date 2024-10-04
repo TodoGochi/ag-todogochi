@@ -49,4 +49,14 @@ export const TODOLIST_DOCS: Record<string, SwaggerOptions> = {
       status: 200,
     },
   },
+  DELETE_TODOLIST: {
+    operation: {
+      summary: 'Delete todolist',
+      description: 'This endpoint deletes a todolist.',
+    },
+    bearerAuth: true,
+    response: {
+      status: 200,
+    },
+  },
 };
