@@ -49,14 +49,14 @@ export class TamagotchiController {
   @Swagger(TAMAGOTCHI_DOCS.GET_TAMAGOTCHI)
   @UseGuards(AccessTokenGuard, RolesGuard)
   @Role(ROLE.MEMBER)
-  @Get(':id/status')
+  @Get(':userId/status')
   async getTamagotchi(
-    @Param('id') id: number,
+    @Param('userId') userId: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.getTamagotchi({
-      userId: id,
+      userId: userId,
       req,
     });
     return res.status(response.status).json(response.data);
