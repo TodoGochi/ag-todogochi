@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { AccessTokenGuard } from 'src/common/core/guards/access-token.guard';
 import { RolesGuard } from 'src/common/core/guards/role.guard';
+import { TamagotchiOwnershipGuard } from 'src/common/core/guards/tamagotchi-id.guard';
 import { Role } from 'src/common/decorators/roles.decorator';
 import { ROLE } from 'src/common/constants/role.constant';
 import { Request, Response } from 'express';
@@ -62,7 +63,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.GET_LEVELPROGRESS)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @Get(':id/level-progress')
   async getLevelProgress(
@@ -78,7 +79,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.FEED_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @Post(':id/feed')
   async feedTamagotchi(
@@ -96,7 +97,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.PET_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @Post(':id/pet')
   async petTamagotchi(
@@ -114,7 +115,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.CURE_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @UseInterceptors(CoinCheckInterceptor)
   @Post(':id/cure')
@@ -133,7 +134,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.RESURRECT_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @UseInterceptors(CoinCheckInterceptor)
   @Post(':id/resurrect')
@@ -152,7 +153,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.RESTART_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @Post(':id/restart')
   async restartTamagotchi(
@@ -170,7 +171,7 @@ export class TamagotchiController {
   }
 
   @Swagger(TAMAGOTCHI_DOCS.PLAY_TAMAGOTCHI)
-  @UseGuards(AccessTokenGuard, RolesGuard)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
   @Post(':id/play')
   async playTamagotchi(

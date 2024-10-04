@@ -26,4 +26,14 @@ export const ERRORS = {
     message: 'User Not Found',
     statusCode: HttpStatusCode.NotFound,
   },
+  'AG-0005': {
+    errorCode: 'AG-0005',
+    message: 'Invalid tamagotchi Id',
+    statusCode: HttpStatusCode.NotFound,
+  },
+  'AG-0006': {
+    errorCode: 'AG-0006',
+    message: 'Tamagotchi Not Found',
+    statusCode: HttpStatusCode.NotFound,
+  },
 };
