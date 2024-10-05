@@ -118,9 +118,10 @@ export class TodolistService {
   async updateTodoList(input: {
     userId: number;
     todoId: number;
-    todoText: string;
-    colorTag: ColorTagType;
-    targetTime: string;
+    todoText?: string;
+    colorTag?: ColorTagType;
+    targetTime?: string;
+    targetDate?: number;
     req: any;
   }) {
     if (
@@ -136,6 +137,7 @@ export class TodolistService {
         todoText: input.todoText,
         colorTag: input.colorTag,
         targetTime: input.targetTime,
+        targetDate: input.targetDate,
       },
     });
 
