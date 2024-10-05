@@ -123,6 +123,7 @@ export class TodolistController {
     return res.status(response.status).json(response.data);
   }
 
+  @Swagger(TODOLIST_DOCS.UPDATE_TODOLIST)
   @UseGuards(AccessTokenGuard, RolesGuard)
   @Role(ROLE.MEMBER)
   @Put('update/:todoId')

@@ -59,4 +59,14 @@ export const TODOLIST_DOCS: Record<string, SwaggerOptions> = {
       status: 200,
     },
   },
+  UPDATE_TODOLIST: {
+    operation: {
+      summary: 'Update todolist',
+      description: 'This endpoint updates a todolist.',
+    },
+    bearerAuth: true,
+    response: {
+      status: 200,
+    },
+  },
 };
