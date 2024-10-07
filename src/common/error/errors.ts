@@ -36,4 +36,9 @@ export const ERRORS = {
     message: 'Tamagotchi Not Found',
     statusCode: HttpStatusCode.NotFound,
   },
+  'AG-0007': {
+    errorCode: 'AG-0007',
+    message: 'Tamagotchi is not Sick',
+    statusCode: HttpStatusCode.NotFound,
+  },
 };

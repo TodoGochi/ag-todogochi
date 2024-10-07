@@ -5,6 +5,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { Request } from 'express';
 import { ApiError } from 'src/common/error/api.error';
 import { UserService as UserServer } from 'src/provider/server/services/user.service';
@@ -69,25 +70,34 @@ export class CoinCheckInterceptor implements NestInterceptor {
         throw new ApiError('AG-0003');
       }
 
-      // 코인 차감 요청
-      await this.userService.post({
-        path: `/user/${tamagotchi.user_id}/coin-transactions`,
-        data: {
-          changeAmount: -requiredCoins, // 필요한 코인 개수만큼 차감
-          description: `Coin deduction for ${serviceName} service: ${requiredCoins} coins`,
-        },
-      });
-
-      // 코인 차감 성공 후, 원래 요청 처리
-      return next.handle();
+      // 요청을 처리하고 성공적으로 완료되면 코인 차감
+      return next.handle().pipe(
+        tap(async () => {
+          // 코인 차감 요청
+          await this.userService.post({
+            path: `/user/${tamagotchi.user_id}/coin-transactions`,
+            data: {
+              changeAmount: -requiredCoins, // 필요한 코인 개수만큼 차감
+              description: `Coin deduction for ${serviceName} service: ${requiredCoins} coins`,
+            },
+          });
+        }),
+        catchError((error) => {
+          // 요청 처리 중 에러 발생 시 처리
+          console.error('Error during request handling:', error.message);
+          if (error.message == 'Tamagotchi is not sick') {
+            throw new ApiError('AG-0007');
+          } else {
+            return throwError(() => new ApiError('AG-0000'));
+          }
+        }),
+      );
     } catch (error) {
-      // 에러 처리
+      // 초기 단계에서 발생한 에러 처리
       if (error instanceof ApiError) {
-        // ApiError는 그대로 다시 던집니다
         return throwError(() => error);
       }
 
-      //예상치 못한 에러 처리
       console.error('Error in coin check:', error.message);
       return throwError(() => new ApiError('AG-0000'));
     }
