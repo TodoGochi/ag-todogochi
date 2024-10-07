@@ -20,7 +20,7 @@ import { TAMAGOTCHI_DOCS } from './constant/tamagotchi.swagger';
 import { TamagotchiService } from './tamagotchi.service';
 import {
   CreateTamagotchiReqDto,
-  TamagotchiReqDto,
+  TamagotchiParamDto,
 } from './dto/tamagotchi-req.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CoinCheckInterceptor } from './interceptors/coin-check.interceptor';
@@ -83,13 +83,11 @@ export class TamagotchiController {
   @Role(ROLE.MEMBER)
   @Post(':id/feed')
   async feedTamagotchi(
-    @Body() body: TamagotchiReqDto,
     @Param('id') id: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.feedTamagotchi({
-      ...body,
       TamagotchiId: id,
       req,
     });
@@ -101,13 +99,11 @@ export class TamagotchiController {
   @Role(ROLE.MEMBER)
   @Post(':id/pet')
   async petTamagotchi(
-    @Body() body: TamagotchiReqDto,
     @Param('id') id: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.petTamagotchi({
-      ...body,
       TamagotchiId: id,
       req,
     });
@@ -120,13 +116,11 @@ export class TamagotchiController {
   @UseInterceptors(CoinCheckInterceptor)
   @Post(':id/cure')
   async cureTamagotchi(
-    @Body() body: TamagotchiReqDto,
     @Param('id') id: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.cureTamagotchi({
-      ...body,
       TamagotchiId: id,
       req,
     });
@@ -139,13 +133,11 @@ export class TamagotchiController {
   @UseInterceptors(CoinCheckInterceptor)
   @Post(':id/resurrect')
   async resurrectTamagotchi(
-    @Body() body: TamagotchiReqDto,
     @Param('id') id: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.resurrectTamagotchi({
-      ...body,
       TamagotchiId: id,
       req,
     });
@@ -157,13 +149,11 @@ export class TamagotchiController {
   @Role(ROLE.MEMBER)
   @Post(':id/restart')
   async restartTamagotchi(
-    @Body() body: TamagotchiReqDto,
     @Param('id') id: number,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.restartTamagotchi({
-      ...body,
       TamagotchiId: id,
       req,
     });
@@ -175,14 +165,12 @@ export class TamagotchiController {
   @Role(ROLE.MEMBER)
   @Post(':id/play')
   async playTamagotchi(
-    @Body() body: TamagotchiReqDto,
-    @Param('id') id: number,
+    @Param() params: TamagotchiParamDto,
     @Req() req: Request,
     @Res() res: Response,
   ) {
     const response = await this.tamagotchiService.playTamagotchi({
-      ...body,
-      TamagotchiId: id,
+      TamagotchiId: params.id,
       req,
     });
     return res.status(response.status).json(response.data);

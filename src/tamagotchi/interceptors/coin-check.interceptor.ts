@@ -11,9 +11,7 @@ import { UserService as UserServer } from 'src/provider/server/services/user.ser
 
 @Injectable()
 export class CoinCheckInterceptor implements NestInterceptor {
-  constructor(
-    private readonly userService: UserServer, // 이 부분은 NestJS가 자동으로 주입
-  ) {}
+  constructor(private readonly userService: UserServer) {}
 
   async intercept(
     context: ExecutionContext,

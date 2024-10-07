@@ -55,138 +55,54 @@ export class TamagotchiService {
   }
 
   // Feed Tamagotchi
-  async feedTamagotchi(input: {
-    userId: number;
-    req: any;
-    TamagotchiId: number;
-  }) {
-    if (
-      input.req.user.role < ROLE.ADMIN &&
-      input.req.user.userId !== input.userId
-    ) {
-      throw new ApiError('AG-0001');
-    }
-
+  async feedTamagotchi(input: { req: any; TamagotchiId: number }) {
     const response = await this.tamagotchiService.post({
       path: `/tamagotchi/${input.TamagotchiId}/feed`,
-      data: {
-        userId: input.userId,
-      },
     });
 
     return { data: response.data, status: response.status };
   }
 
   // Pet Tamagotchi
-  async petTamagotchi(input: {
-    userId: number;
-    req: any;
-    TamagotchiId: number;
-  }) {
-    if (
-      input.req.user.role < ROLE.ADMIN &&
-      input.req.user.userId !== input.userId
-    ) {
-      throw new ApiError('AG-0001');
-    }
-
+  async petTamagotchi(input: { req: any; TamagotchiId: number }) {
     const response = await this.tamagotchiService.post({
       path: `/tamagotchi/${input.TamagotchiId}/pet`,
-      data: {
-        userId: input.userId,
-      },
     });
 
     return { data: response.data, status: response.status };
   }
 
   // Cure Tamagotchi
-  async cureTamagotchi(input: {
-    userId: number;
-    req: any;
-    TamagotchiId: number;
-  }) {
-    if (
-      input.req.user.role < ROLE.ADMIN &&
-      input.req.user.userId !== input.userId
-    ) {
-      throw new ApiError('AG-0001');
-    }
-
+  async cureTamagotchi(input: { req: any; TamagotchiId: number }) {
     const response = await this.tamagotchiService.post({
       path: `/tamagotchi/${input.TamagotchiId}/cure`,
-      data: {
-        userId: input.userId,
-      },
     });
 
     return { data: response.data, status: response.status };
   }
 
   // Resurrect Tamagotchi
-  async resurrectTamagotchi(input: {
-    userId: number;
-    req: any;
-    TamagotchiId: number;
-  }) {
-    if (
-      input.req.user.role < ROLE.ADMIN &&
-      input.req.user.userId !== input.userId
-    ) {
-      throw new ApiError('AG-0001');
-    }
-
+  async resurrectTamagotchi(input: { req: any; TamagotchiId: number }) {
     const response = await this.tamagotchiService.post({
       path: `/tamagotchi/${input.TamagotchiId}/resurrect`,
-      data: {
-        userId: input.userId,
-      },
     });
 
     return { data: response.data, status: response.status };
   }
 
   // Restart Tamagotchi
-  async restartTamagotchi(input: {
-    userId: number;
-    req: any;
-    TamagotchiId: number;
-  }) {
-    if (
-      input.req.user.role < ROLE.ADMIN &&
-      input.req.user.userId !== input.userId
-    ) {
-      throw new ApiError('AG-0001');
-    }
-
+  async restartTamagotchi(input: { req: any; TamagotchiId: number }) {
     const response = await this.tamagotchiService.post({
       path: `/tamagotchi/${input.TamagotchiId}/restart`,
-      data: {
-        userId: input.userId,
-      },
     });
 
     return { data: response.data, status: response.status };
   }
 
   // Play with Tamagotchi
-  async playTamagotchi(input: {
-    userId: number;
-    req: any;
-    TamagotchiId: number;
-  }) {
-    if (
-      input.req.user.role < ROLE.ADMIN &&
-      input.req.user.userId !== input.userId
-    ) {
-      throw new ApiError('AG-0001');
-    }
-
+  async playTamagotchi(input: { TamagotchiId: number; req: any }) {
     const response = await this.tamagotchiService.post({
-      path: `/tamagotchi/${input.TamagotchiId}play`,
-      data: {
-        userId: input.userId,
-      },
+      path: `/tamagotchi/${input.TamagotchiId}/play`,
     });
 
     return { data: response.data, status: response.status };

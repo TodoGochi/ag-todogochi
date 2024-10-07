@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
+import { IsInt, IsNumber, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateTamagotchiReqDto {
@@ -13,9 +13,8 @@ export class CreateTamagotchiReqDto {
   nickname: string;
 }
 
-export class TamagotchiReqDto {
-  @ApiProperty({ example: 1, description: 'User ID' })
+export class TamagotchiParamDto {
   @Type(() => Number)
-  @IsNumber()
-  userId: number;
+  @IsInt()
+  id: number;
 }
