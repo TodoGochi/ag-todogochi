@@ -45,6 +45,9 @@ export class CoinCheckInterceptor implements NestInterceptor {
     } else if (path.includes('resurrect')) {
       requiredCoins = 10;
       serviceName = 'resurrect';
+    } else if (path.includes('feed')) {
+      requiredCoins = 1;
+      serviceName = 'feed';
     } else {
       requiredCoins = 0;
       serviceName = 'default';
@@ -85,9 +88,19 @@ export class CoinCheckInterceptor implements NestInterceptor {
         catchError((error) => {
           // 요청 처리 중 에러 발생 시 처리
           console.error('Error during request handling:', error.message);
-          if (error.message == 'Tamagotchi is not sick') {
+
+          // error 객체에 response와 errorCode가 존재하는지 확인
+          if (error.response && error.response.errorCode) {
+            // errorCode가 존재할 경우에는 해당 에러를 그대로 던짐
+            return throwError(() => error);
+          } else if (
+            error.message === 'Tamagotchi is not sick' ||
+            error.message === 'hunger status already max'
+          ) {
+            // 특정 에러 메시지에 대해 AG-0007 반환
             throw new ApiError('AG-0007');
           } else {
+            // 그 외의 경우 AG-0000 반환
             return throwError(() => new ApiError('AG-0000'));
           }
         }),

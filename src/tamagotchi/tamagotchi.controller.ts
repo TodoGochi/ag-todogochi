@@ -81,6 +81,7 @@ export class TamagotchiController {
   @Swagger(TAMAGOTCHI_DOCS.FEED_TAMAGOTCHI)
   @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
+  @UseInterceptors(CoinCheckInterceptor)
   @Post(':id/feed')
   async feedTamagotchi(
     @Param('id') id: number,
