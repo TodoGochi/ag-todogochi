@@ -10,6 +10,7 @@ import { Request } from 'express';
 import { ApiError } from 'src/common/error/api.error';
 import { UserService as UserServer } from 'src/provider/server/services/user.service';
 import { TamagotchiService as TamagotchiServer } from 'src/provider/server/services/tamagotchi.service';
+import { rewardComment } from 'src/common/constants/reward-comment';
 
 @Injectable()
 export class CoinCheckInterceptor implements NestInterceptor {
@@ -84,7 +85,7 @@ export class CoinCheckInterceptor implements NestInterceptor {
             path: `/user/${tamagotchi.user_id}/coin-transactions`,
             data: {
               changeAmount: -requiredCoins, // 필요한 코인 개수만큼 차감
-              description: `Coin deduction for ${serviceName} service: ${requiredCoins} coins`,
+              description: `${rewardComment[serviceName]}`,
             },
           });
         }),
