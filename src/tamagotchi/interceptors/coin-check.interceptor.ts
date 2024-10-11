@@ -48,6 +48,9 @@ export class CoinCheckInterceptor implements NestInterceptor {
     } else if (path.includes('feed')) {
       requiredCoins = 1;
       serviceName = 'feed';
+    } else if (path.includes('play')) {
+      requiredCoins = 1;
+      serviceName = 'play';
     } else {
       requiredCoins = 0;
       serviceName = 'default';

@@ -164,6 +164,7 @@ export class TamagotchiController {
   @Swagger(TAMAGOTCHI_DOCS.PLAY_TAMAGOTCHI)
   @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
   @Role(ROLE.MEMBER)
+  @UseInterceptors(CoinCheckInterceptor)
   @Post(':id/play')
   async playTamagotchi(
     @Param() params: TamagotchiParamDto,
