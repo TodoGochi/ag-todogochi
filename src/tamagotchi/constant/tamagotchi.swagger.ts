@@ -3,6 +3,7 @@ import {
   PlayResponseDto,
   TamagotchiResDto,
   LevelProgressResDto,
+  LevelUpResDto,
 } from '../dto/tamagotchi-res.dto';
 
 export const TAMAGOTCHI_DOCS: Record<string, SwaggerOptions> = {
@@ -111,6 +112,17 @@ export const TAMAGOTCHI_DOCS: Record<string, SwaggerOptions> = {
     response: {
       status: 200,
       type: PlayResponseDto,
+    },
+  },
+  APPLY_LEVELUP: {
+    operation: {
+      summary: 'apply levelup Effect to tamagotchi',
+      description: 'put boolean value to each level to check levelup Effect',
+    },
+    bearerAuth: true,
+    response: {
+      status: 201,
+      type: LevelUpResDto,
     },
   },
 };

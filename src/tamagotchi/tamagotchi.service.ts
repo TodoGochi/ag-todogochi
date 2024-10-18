@@ -107,4 +107,16 @@ export class TamagotchiService {
 
     return { data: response.data, status: response.status };
   }
+
+  async levelUpEffect(input: {
+    TamagotchiId: number;
+    level: number;
+    req: any;
+  }) {
+    const response = await this.tamagotchiService.post({
+      path: `/tamagotchi/${input.TamagotchiId}/levelupeffect/${input.level}`,
+    });
+
+    return { data: response.data, status: response.status };
+  }
 }

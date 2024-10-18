@@ -177,4 +177,22 @@ export class TamagotchiController {
     });
     return res.status(response.status).json(response.data);
   }
+
+  @Role(ROLE.MEMBER)
+  @Post(':id/levelupeffect/:level')
+  @Swagger(TAMAGOTCHI_DOCS.APPLY_LEVELUP)
+  @UseGuards(AccessTokenGuard, RolesGuard, TamagotchiOwnershipGuard)
+  async levelUpEffect(
+    @Param() params,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const response = await this.tamagotchiService.levelUpEffect({
+      TamagotchiId: params.id,
+      level: params.level,
+      req,
+    });
+
+    return res.status(response.status).json(response.data);
+  }
 }
